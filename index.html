@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>小猫抓鱼动画</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="app">
+    <section class="hero">
+      <p class="eyebrow">Kitten Fishing Game</p>
+      <h1>小猫抓鱼动画</h1>
+      <p class="description">点击鱼缸里的小鱼，小猫会跑过去抓鱼。抓到鱼后，小鱼会换一个位置继续游动。</p>
+    </section>
+
+    <section class="pond" id="pond" aria-label="小猫抓鱼场景">
+      <div class="ripples" aria-hidden="true"></div>
+      <div class="cat" id="cat" role="img" aria-label="一只正在抓鱼的小猫">
+        <div class="cat-ear left"></div>
+        <div class="cat-ear right"></div>
+        <div class="cat-face">
+          <span class="cat-eye left"></span>
+          <span class="cat-eye right"></span>
+          <span class="cat-nose"></span>
+          <span class="cat-mouth"></span>
+          <span class="whisker one"></span>
+          <span class="whisker two"></span>
+          <span class="whisker three"></span>
+          <span class="whisker four"></span>
+        </div>
+        <div class="cat-body"></div>
+        <div class="cat-tail"></div>
+        <div class="cat-paw"></div>
+      </div>
+
+      <button class="fish" id="fish" type="button" aria-label="点击让小猫抓这条鱼">
+        <span class="fish-body"></span>
+        <span class="fish-tail"></span>
+        <span class="fish-eye"></span>
+      </button>
+
+      <div class="score-card" aria-live="polite">
+        <span>抓到</span>
+        <strong id="score">0</strong>
+        <span>条鱼</span>
+      </div>
+    </section>
+
+    <div class="controls">
+      <button id="randomFish" type="button">换一条鱼的位置</button>
+      <p id="message">提示：点击小鱼开始！</p>
+    </div>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
