@@ -44,7 +44,7 @@ function moveCatToFish() {
   cat.classList.add('running');
   cat.style.setProperty('--cat-x', `${Math.max(12, targetX)}px`);
   cat.style.setProperty('--cat-y', `${Math.max(12, targetY)}px`);
-  message.textContent = '小猫出发抓鱼！';
+  message.textContent = '沈阳的AI小猫开始工作！';
 
   window.setTimeout(() => {
     cat.classList.remove('running');
@@ -67,3 +67,16 @@ fish.addEventListener('click', moveCatToFish);
 randomFishButton.addEventListener('click', placeFishRandomly);
 window.addEventListener('load', placeFishRandomly);
 window.addEventListener('resize', placeFishRandomly);
+ const button = document.getElementById('myButton');
+
+button.addEventListener('click', () => {
+
+  const steelWeight = document.getElementById('steelWeight').value;
+
+  const steelPrice = document.getElementById('steelPrice').value;
+
+  const cost = steelWeight * steelPrice;
+
+  message.textContent = '材料成本：' + cost + ' 元';
+
+});
