@@ -1,65 +1,73 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>沈阳的第一个AI网页</title>
-  <link rel="stylesheet" href="styles.css" />
+    <meta charset="UTF-8">
+    <title>隧道二衬台车智能报价助手</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
-  <main class="app">
-    <section class="hero">
-      <p class="eyebrow">Kitten Fishing Game</p>
-      <h1>沈阳的AI学习实验室</h1>
-      <p class="description">点击鱼缸里的小鱼，小猫会跑过去抓鱼。抓到鱼后，小鱼会换一个位置继续游动。</p>
-    </section>
 
-    <section class="pond" id="pond" aria-label="小猫抓鱼场景">
-      <div class="ripples" aria-hidden="true"></div>
-      <div class="cat" id="cat" role="img" aria-label="一只正在抓鱼的小猫">
-        <div class="cat-ear left"></div>
-        <div class="cat-ear right"></div>
-        <div class="cat-face">
-          <span class="cat-eye left"></span>
-          <span class="cat-eye right"></span>
-          <span class="cat-nose"></span>
-          <span class="cat-mouth"></span>
-          <span class="whisker one"></span>
-          <span class="whisker two"></span>
-          <span class="whisker three"></span>
-          <span class="whisker four"></span>
+    <div class="container">
+
+        <h1>隧道二衬台车智能报价助手</h1>
+
+        <div class="form-box">
+
+            <label>
+                项目名称：
+                <input id="projectName" placeholder="请输入项目名称">
+            </label>
+
+            <label>
+                台车长度（米）：
+                <input id="carLength" type="number" placeholder="请输入长度">
+            </label>
+
+            <label>
+                钢材重量（吨）：
+                <input id="steelWeight" type="number" placeholder="请输入重量">
+            </label>
+
+            <label>
+                钢材价格（元/吨）：
+                <input id="steelPrice" type="number" placeholder="请输入价格">
+            </label>
+
+            <label>
+                人工费用：
+                <input id="laborCost" type="number" placeholder="请输入人工费">
+            </label>
+
+            <label>
+                其他费用：
+                <input id="otherCost" type="number" placeholder="请输入其他费用">
+            </label>
+
+
+            <button id="calculate">
+                计算报价
+            </button>
+
         </div>
-        <div class="cat-body"></div>
-        <div class="cat-tail"></div>
-        <div class="cat-paw"></div>
-      </div>
-     <input id="number1" placeholder="钢材重量（吨）">
 
-<input id="number2" placeholder="钢材单价（元/吨)">
 
-<button id="myButton">
-  计算材料成本
-</button>
+        <div class="result">
 
-      <button class="fish" id="fish" type="button" aria-label="点击让小猫抓这条鱼">
-        <span class="fish-body"></span>
-        <span class="fish-tail"></span>
-        <span class="fish-eye"></span>
-      </button>
+            <h2>计算结果</h2>
 
-      <div class="score-card" aria-live="polite">
-        <span>抓到</span>
-        <strong id="score">0</strong>
-        <span>条鱼</span>
-      </div>
-    </section>
+            <p id="resultText">
+                等待计算...
+            </p>
 
-    <div class="controls">
-      <button id="randomFish" type="button">换一条鱼的位置</button>
-      <p id="message">提示：点击小鱼开始！</p>
+        </div>
+
     </div>
-  </main>
 
-  <script src="script.js"></script>
+
+<script src="script.js"></script>
+
 </body>
+
 </html>
