@@ -30,13 +30,23 @@ button.addEventListener('click', () => {
         totalCost * 1.15;
 
 
-    document.getElementById('resultText').textContent =
-        `
-        材料成本：${materialCost} 元
-        
-        总成本：${totalCost} 元
-        
-        建议报价：${quote} 元
-        `;
+    const profit = quote - totalCost;
+
+const profitRate = 
+    (profit / totalCost * 100).toFixed(2);
+
+
+document.getElementById('resultText').textContent =
+`
+材料成本：${materialCost} 元
+
+总成本：${totalCost} 元
+
+建议报价：${quote} 元
+
+预计利润：${profit} 元
+
+利润率：${profitRate}%
+`;
 
 });
