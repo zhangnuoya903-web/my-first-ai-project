@@ -1,73 +1,307 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-
 <head>
-    <meta charset="UTF-8">
-    <title>隧道二衬台车智能报价助手</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>隧道二衬台车智能报价系统 V2.0</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
+  <main class="page-container">
 
-    <div class="container">
+    <header class="page-header">
+      <p class="version">V2.0</p>
+      <h1>隧道二衬台车智能报价系统</h1>
+      <p>非标定制设备方案、成本与商务报价辅助工具</p>
+    </header>
 
-        <h1>隧道二衬台车智能报价助手</h1>
+    <section class="form-section">
+      <h2>一、项目基本信息</h2>
 
-        <div class="form-box">
+      <div class="form-grid">
+        <label>
+          项目名称
+          <input id="projectName" type="text" placeholder="例如：某铁路隧道二衬项目">
+        </label>
 
-            <label>
-                项目名称：
-                <input id="projectName" placeholder="请输入项目名称">
-            </label>
+        <label>
+          国家或地区
+          <input id="country" type="text" placeholder="例如：中国、阿尔及利亚">
+        </label>
 
-            <label>
-                台车长度（米）：
-                <input id="carLength" type="number" placeholder="请输入长度">
-            </label>
+        <label>
+          客户名称
+          <input id="customerName" type="text" placeholder="请输入客户或施工单位名称">
+        </label>
 
-            <label>
-                钢材重量（吨）：
-                <input id="steelWeight" type="number" placeholder="请输入重量">
-            </label>
+        <label>
+          报价场景
+          <select id="quotationType">
+            <option value="domestic">国内项目</option>
+            <option value="overseas">海外项目</option>
+          </select>
+        </label>
+      </div>
+    </section>
 
-            <label>
-                钢材价格（元/吨）：
-                <input id="steelPrice" type="number" placeholder="请输入价格">
-            </label>
+    <section class="form-section">
+      <h2>二、隧道及台车参数</h2>
 
-            <label>
-                人工费用：
-                <input id="laborCost" type="number" placeholder="请输入人工费">
-            </label>
+      <div class="form-grid">
+        <label>
+          隧道类型
+          <select id="tunnelType">
+            <option value="railway">铁路隧道</option>
+            <option value="highway">公路隧道</option>
+            <option value="hydraulic">水工隧洞</option>
+            <option value="metro">地铁隧道</option>
+          </select>
+        </label>
 
-            <label>
-                其他费用：
-                <input id="otherCost" type="number" placeholder="请输入其他费用">
-            </label>
+        <label>
+          台车长度
+          <select id="trolleyLength">
+            <option value="9">9 米</option>
+            <option value="10.5">10.5 米</option>
+            <option value="12" selected>12 米</option>
+            <option value="custom">其他定制长度</option>
+          </select>
+        </label>
 
+        <label>
+          自定义长度（米）
+          <input id="customLength" type="number" min="0" step="0.1" placeholder="选其他长度时填写">
+        </label>
 
-            <button id="calculate">
-                计算报价
-            </button>
+        <label>
+          台车半径（米）
+          <input id="trolleyRadius" type="number" min="0" step="0.01" placeholder="请输入设计半径">
+        </label>
 
+        <label>
+          隧道最大宽度（米）
+          <input id="tunnelWidth" type="number" min="0" step="0.01" placeholder="请输入最大宽度">
+        </label>
+
+        <label>
+          隧道最大高度（米）
+          <input id="tunnelHeight" type="number" min="0" step="0.01" placeholder="请输入最大高度">
+        </label>
+
+        <label>
+          二衬厚度（厘米）
+          <input id="liningThickness" type="number" min="0" step="1" placeholder="例如：35">
+        </label>
+
+        <label>
+          最小曲线半径（米）
+          <input id="curveRadius" type="number" min="0" step="1" placeholder="无曲线可留空">
+        </label>
+
+        <label>
+          结构等级
+          <select id="structureLevel">
+            <option value="standard">普通型</option>
+            <option value="reinforced">加强型</option>
+            <option value="heavy">重载型</option>
+          </select>
+        </label>
+
+        <label>
+          参考机械主体重量（吨）
+          <input id="referenceWeight" type="number" readonly placeholder="系统后续自动估算">
+        </label>
+
+        <label>
+          工程师确认重量（吨）
+          <input id="confirmedWeight" type="number" min="0" step="0.1" placeholder="允许人工修正">
+        </label>
+      </div>
+
+      <p class="form-note">
+        重量数据库仅作为历史经验参考，最终数据应由工程师结合断面、结构和图纸确认。
+      </p>
+    </section>
+
+    <section class="form-section">
+      <h2>三、基础系统配置</h2>
+
+      <div class="form-grid">
+        <label>
+          液压配置
+          <select id="hydraulicLevel">
+            <option value="standard">标准液压系统</option>
+            <option value="reinforced">加强液压系统</option>
+            <option value="custom">定制液压系统</option>
+          </select>
+        </label>
+
+        <label>
+          行走方式
+          <select id="travelMode">
+            <option value="hydraulic">液压自行式</option>
+            <option value="motor">电机行走式</option>
+            <option value="traction">牵引式</option>
+            <option value="custom">其他定制方式</option>
+          </select>
+        </label>
+
+        <label>
+          安装服务
+          <select id="installationService">
+            <option value="none">客户自行安装</option>
+            <option value="guidance">我方技术指导</option>
+            <option value="full">我方现场安装调试</option>
+          </select>
+        </label>
+
+        <label>
+          运输方式
+          <select id="transportMode">
+            <option value="domestic">国内陆运</option>
+            <option value="sea">海运</option>
+            <option value="land">国际陆运</option>
+            <option value="custom">其他方式</option>
+          </select>
+        </label>
+      </div>
+    </section>
+
+    <section class="form-section">
+      <h2>四、智能化配置</h2>
+
+      <div class="checkbox-grid">
+        <label class="check-item">
+          <input id="autoDistributor" type="checkbox">
+          自动布料机
+        </label>
+
+        <label class="check-item">
+          <input id="internalVibrator" type="checkbox">
+          插入式振捣器
+        </label>
+
+        <label class="check-item">
+          <input id="visualEndForm" type="checkbox">
+          可视化堵头模
+        </label>
+
+        <label class="check-item">
+          <input id="antiBurstDevice" type="checkbox">
+          防爆模装置
+        </label>
+
+        <label class="check-item">
+          <input id="softOverlap" type="checkbox">
+          软搭接系统
+        </label>
+      </div>
+    </section>
+
+    <section class="form-section">
+      <h2>五、成本参数</h2>
+
+      <div class="form-grid">
+        <label>
+          当前钢材单价（元/吨）
+          <input id="steelPrice" type="number" min="0" step="1" placeholder="请输入市场采购价">
+        </label>
+
+        <label>
+          加工费单价（元/吨）
+          <input id="processingPrice" type="number" min="0" step="1" placeholder="请输入加工费标准">
+        </label>
+
+        <label>
+          液压系统成本（元）
+          <input id="hydraulicCost" type="number" min="0" step="1" placeholder="请输入液压系统成本">
+        </label>
+
+        <label>
+          电气系统成本（元）
+          <input id="electricalCost" type="number" min="0" step="1" placeholder="请输入电气系统成本">
+        </label>
+
+        <label>
+          运输费用（元）
+          <input id="transportCost" type="number" min="0" step="1" placeholder="请输入运输费用">
+        </label>
+
+        <label>
+          安装调试费（元）
+          <input id="installationCost" type="number" min="0" step="1" placeholder="请输入安装调试费">
+        </label>
+
+        <label>
+          其他费用（元）
+          <input id="otherCost" type="number" min="0" step="1" placeholder="请输入其他费用">
+        </label>
+
+        <label>
+          目标利润率（%）
+          <input id="profitRate" type="number" min="0" step="0.1" value="15">
+        </label>
+      </div>
+    </section>
+
+    <section class="action-section">
+      <button id="calculateButton" type="button">生成报价分析</button>
+      <button id="resetButton" type="button" class="secondary-button">重置数据</button>
+    </section>
+
+    <section class="result-section">
+      <h2>六、报价分析结果</h2>
+
+      <div class="result-grid">
+        <div>
+          <span>设备名称</span>
+          <strong id="equipmentName">等待生成</strong>
         </div>
 
-
-        <div class="result">
-
-            <h2>计算结果</h2>
-
-            <p id="resultText">
-                等待计算...
-            </p>
-
+        <div>
+          <span>确认机械重量</span>
+          <strong id="resultWeight">0 吨</strong>
         </div>
 
-    </div>
+        <div>
+          <span>钢材采购成本</span>
+          <strong id="resultSteelCost">0 元</strong>
+        </div>
 
+        <div>
+          <span>加工制造费</span>
+          <strong id="resultProcessingCost">0 元</strong>
+        </div>
 
-<script src="script.js"></script>
+        <div>
+          <span>智能配置费用</span>
+          <strong id="resultSmartCost">0 元</strong>
+        </div>
 
+        <div>
+          <span>成本合计</span>
+          <strong id="resultTotalCost">0 元</strong>
+        </div>
+
+        <div>
+          <span>预计利润</span>
+          <strong id="resultProfit">0 元</strong>
+        </div>
+
+        <div>
+          <span>建议报价</span>
+          <strong id="resultQuotation">0 元</strong>
+        </div>
+      </div>
+
+      <p id="resultMessage" class="result-message">
+        当前为静态界面原型，下一步接入重量参考和报价计算逻辑。
+      </p>
+    </section>
+
+  </main>
+
+  <script src="script.js"></script>
 </body>
-
 </html>
