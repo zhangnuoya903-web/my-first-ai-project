@@ -1,0 +1,76 @@
+{
+  "project": {
+    "id": "PRJ-DEMO-001",
+    "name": "示例隧道二衬台车项目（非真实数据）",
+    "quotationType": "domestic"
+  },
+  "customer": {
+    "id": "CUST-DEMO-001",
+    "name": "示例客户（非真实数据）"
+  },
+  "country": "CN",
+  "currency": "CNY",
+  "tunnelParameters": {
+    "tunnelType": "railway",
+    "maximumWidth": null,
+    "maximumHeight": null,
+    "liningThicknessCm": null,
+    "minimumCurveRadius": null
+  },
+  "trolleyParameters": {
+    "length": 12,
+    "radius": null,
+    "structureLevel": "standard",
+    "referenceWeight": 124,
+    "confirmedWeight": null,
+    "weightSource": "historical-reference",
+    "weightWarning": "历史经验参考，不替代正式设计",
+    "manualCorrectionReason": null
+  },
+  "quotationParameters": {
+    "steelPrice": null,
+    "processingPrice": null,
+    "hydraulicCost": null,
+    "electricalCost": null,
+    "transportCost": null,
+    "installationCost": null,
+    "otherCost": null,
+    "profitRate": null
+  },
+  "smartConfigurations": [
+    {
+      "configId": "SC-0001",
+      "selected": false,
+      "approvedPrice": null
+    },
+    {
+      "configId": "SC-0002",
+      "selected": false,
+      "approvedPrice": null
+    },
+    {
+      "configId": "SC-0003",
+      "selected": false,
+      "approvedPrice": null
+    },
+    {
+      "configId": "SC-0004",
+      "selected": false,
+      "approvedPrice": null
+    },
+    {
+      "configId": "SC-0005",
+      "selected": false,
+      "approvedPrice": null
+    }
+  ],
+  "quotations": [],
+  "files": [],
+  "status": "draft",
+  "versionInfo": {
+    "schemaVersion": "2.0.0",
+    "recordVersion": 1,
+    "createdAt": null,
+    "updatedAt": null
+  }
+}

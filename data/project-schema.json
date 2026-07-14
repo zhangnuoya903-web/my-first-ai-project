@@ -1,8 +1,8 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://lygd.example/schemas/project-schema.json",
-  "title": "LYGD Tunnel Project",
-  "description": "隧道二衬台车项目数据对象。重量字段区分经验参考与工程师确认。",
+  "title": "LYGD 项目知识库项目对象",
+  "description": "隧道二衬台车项目知识库记录；经验重量不得视为设计重量。",
   "type": "object",
   "additionalProperties": false,
   "required": [
@@ -14,27 +14,34 @@
     "trolleyParameters",
     "quotationParameters",
     "smartConfigurations",
+    "quotations",
+    "files",
+    "status",
     "versionInfo"
   ],
   "properties": {
     "project": {
+      "description": "项目基础信息及唯一标识。",
       "type": "object",
       "additionalProperties": false,
       "required": [
-        "name"
+        "id",
+        "name",
+        "quotationType"
       ],
       "properties": {
         "id": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "description": "项目唯一编号。",
+          "type": "string",
+          "minLength": 1
         },
         "name": {
+          "description": "项目名称。",
           "type": "string",
           "minLength": 1
         },
         "quotationType": {
+          "description": "报价场景，区分国内与海外项目。",
           "type": "string",
           "enum": [
             "domestic",
@@ -44,33 +51,38 @@
       }
     },
     "customer": {
+      "description": "项目关联客户快照，customerId 对应客户知识库记录。",
       "type": "object",
       "additionalProperties": false,
       "required": [
+        "id",
         "name"
       ],
       "properties": {
         "id": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "description": "关联客户唯一编号。",
+          "type": "string",
+          "minLength": 1
         },
         "name": {
+          "description": "关联客户名称快照。",
           "type": "string",
           "minLength": 1
         }
       }
     },
     "country": {
+      "description": "项目所在国家或地区的两位代码，对应国家知识库 countryCode。",
       "type": "string",
-      "minLength": 1
+      "pattern": "^[A-Z]{2}$"
     },
     "currency": {
+      "description": "项目报价使用的三位币种代码。",
       "type": "string",
       "pattern": "^[A-Z]{3}$"
     },
     "tunnelParameters": {
+      "description": "隧道工程参数。",
       "type": "object",
       "additionalProperties": false,
       "required": [
@@ -78,6 +90,7 @@
       ],
       "properties": {
         "tunnelType": {
+          "description": "隧道类型。",
           "type": "string",
           "enum": [
             "railway",
@@ -87,6 +100,7 @@
           ]
         },
         "maximumWidth": {
+          "description": "隧道最大宽度，单位为米；未知时为 null。",
           "type": [
             "number",
             "null"
@@ -94,6 +108,7 @@
           "minimum": 0
         },
         "maximumHeight": {
+          "description": "隧道最大高度，单位为米；未知时为 null。",
           "type": [
             "number",
             "null"
@@ -101,6 +116,7 @@
           "minimum": 0
         },
         "liningThicknessCm": {
+          "description": "二衬厚度，单位为厘米；未知时为 null。",
           "type": [
             "number",
             "null"
@@ -108,6 +124,7 @@
           "minimum": 0
         },
         "minimumCurveRadius": {
+          "description": "最小曲线半径，单位为米；未知或无曲线时为 null。",
           "type": [
             "number",
             "null"
@@ -117,18 +134,24 @@
       }
     },
     "trolleyParameters": {
+      "description": "台车长度、结构和重量信息。",
       "type": "object",
       "additionalProperties": false,
       "required": [
         "length",
-        "structureLevel"
+        "structureLevel",
+        "referenceWeight",
+        "confirmedWeight",
+        "weightSource"
       ],
       "properties": {
         "length": {
+          "description": "台车长度，单位为米。",
           "type": "number",
           "exclusiveMinimum": 0
         },
         "radius": {
+          "description": "台车设计半径，单位为米；未知时为 null。",
           "type": [
             "number",
             "null"
@@ -136,6 +159,7 @@
           "minimum": 0
         },
         "structureLevel": {
+          "description": "台车结构等级。",
           "type": "string",
           "enum": [
             "standard",
@@ -144,31 +168,41 @@
           ]
         },
         "referenceWeight": {
+          "description": "历史经验参考重量，单位为吨；不能替代设计重量。",
           "type": [
             "number",
             "null"
           ],
-          "minimum": 0,
-          "description": "历史经验参考重量，不是设计重量"
+          "minimum": 0
         },
         "confirmedWeight": {
+          "description": "工程师确认重量，单位为吨；存在时优先于参考重量。",
           "type": [
             "number",
             "null"
           ],
-          "minimum": 0,
-          "description": "工程师确认重量，优先于参考重量"
+          "minimum": 0
         },
         "weightSource": {
+          "description": "项目采用重量的来源。",
           "type": "string",
           "enum": [
             "historical-reference",
+            "derived-reference",
             "engineer-confirmed",
             "manual-required",
             "unavailable"
           ]
         },
+        "weightWarning": {
+          "description": "重量来源及风险提示。",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
         "manualCorrectionReason": {
+          "description": "非标项目人工修正原因；没有修正时为 null。",
           "type": [
             "string",
             "null"
@@ -177,6 +211,7 @@
       }
     },
     "quotationParameters": {
+      "description": "报价计算输入；未经核价的数据必须使用 null。",
       "type": "object",
       "additionalProperties": false,
       "required": [
@@ -191,58 +226,96 @@
       ],
       "properties": {
         "steelPrice": {
-          "type": "number",
+          "description": "钢材单价；未经核价时为 null。",
+          "type": [
+            "number",
+            "null"
+          ],
           "minimum": 0
         },
         "processingPrice": {
-          "type": "number",
+          "description": "加工费单价；未经核价时为 null。",
+          "type": [
+            "number",
+            "null"
+          ],
           "minimum": 0
         },
         "hydraulicCost": {
-          "type": "number",
+          "description": "液压系统成本；未经核价时为 null。",
+          "type": [
+            "number",
+            "null"
+          ],
           "minimum": 0
         },
         "electricalCost": {
-          "type": "number",
+          "description": "电气系统成本；未经核价时为 null。",
+          "type": [
+            "number",
+            "null"
+          ],
           "minimum": 0
         },
         "transportCost": {
-          "type": "number",
+          "description": "运输成本；未经核价时为 null。",
+          "type": [
+            "number",
+            "null"
+          ],
           "minimum": 0
         },
         "installationCost": {
-          "type": "number",
+          "description": "安装调试成本；未经核价时为 null。",
+          "type": [
+            "number",
+            "null"
+          ],
           "minimum": 0
         },
         "otherCost": {
-          "type": "number",
+          "description": "其他成本；未经核价时为 null。",
+          "type": [
+            "number",
+            "null"
+          ],
           "minimum": 0
         },
         "profitRate": {
-          "type": "number",
+          "description": "目标利润率；未经批准时为 null。",
+          "type": [
+            "number",
+            "null"
+          ],
           "minimum": 0
         }
       }
     },
     "smartConfigurations": {
+      "description": "项目选用的智能配置及批准价格。",
       "type": "array",
       "uniqueItems": true,
       "items": {
+        "description": "单项智能配置记录。",
         "type": "object",
         "additionalProperties": false,
         "required": [
           "configId",
-          "selected"
+          "selected",
+          "approvedPrice"
         ],
         "properties": {
           "configId": {
+            "description": "智能配置编号，对应 smart-config.json。",
             "type": "string",
             "pattern": "^SC-[0-9]{4}$"
           },
           "selected": {
+            "description": "项目是否选择该配置。",
             "type": "boolean"
           },
           "approvedPrice": {
+            "description": "经批准的独立配置价格；未核价时为 null。",
             "type": [
               "number",
               "null"
@@ -252,22 +325,165 @@
         }
       }
     },
+    "quotations": {
+      "description": "项目历史报价记录的轻量索引。",
+      "type": "array",
+      "items": {
+        "description": "单个报价版本索引。",
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "quotationId",
+          "version",
+          "status",
+          "currency",
+          "totalAmount",
+          "quotationDate"
+        ],
+        "properties": {
+          "quotationId": {
+            "description": "报价唯一编号。",
+            "type": "string",
+            "minLength": 1
+          },
+          "version": {
+            "description": "报价版本号。",
+            "type": "integer",
+            "minimum": 1
+          },
+          "status": {
+            "description": "报价状态。",
+            "type": "string",
+            "enum": [
+              "draft",
+              "review",
+              "approved",
+              "rejected"
+            ]
+          },
+          "currency": {
+            "description": "报价币种代码。",
+            "type": "string",
+            "pattern": "^[A-Z]{3}$"
+          },
+          "totalAmount": {
+            "description": "报价总额；尚未生成或批准时为 null。",
+            "type": [
+              "number",
+              "null"
+            ],
+            "minimum": 0
+          },
+          "quotationDate": {
+            "description": "报价日期；未生成时为 null。",
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date"
+          }
+        }
+      }
+    },
+    "files": {
+      "description": "项目相关文件记录。",
+      "type": "array",
+      "items": {
+        "description": "单个项目文件的元数据记录，不直接保存文件内容。",
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "fileId",
+          "name",
+          "category",
+          "path",
+          "version",
+          "recordedAt"
+        ],
+        "properties": {
+          "fileId": {
+            "description": "文件记录唯一编号。",
+            "type": "string",
+            "minLength": 1
+          },
+          "name": {
+            "description": "文件显示名称。",
+            "type": "string",
+            "minLength": 1
+          },
+          "category": {
+            "description": "文件类别。",
+            "type": "string",
+            "enum": [
+              "drawing",
+              "quotation",
+              "contract",
+              "technical",
+              "photo",
+              "other"
+            ]
+          },
+          "path": {
+            "description": "文件存储位置或受控引用。",
+            "type": "string",
+            "minLength": 1
+          },
+          "version": {
+            "description": "文件版本标识。",
+            "type": "string",
+            "minLength": 1
+          },
+          "recordedAt": {
+            "description": "文件登记时间。",
+            "type": "string",
+            "format": "date-time"
+          },
+          "remark": {
+            "description": "文件备注；没有备注时为 null。",
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      }
+    },
+    "status": {
+      "description": "项目生命周期状态。",
+      "type": "string",
+      "enum": [
+        "draft",
+        "planning",
+        "quoted",
+        "approved",
+        "in-production",
+        "completed",
+        "archived"
+      ]
+    },
     "versionInfo": {
+      "description": "项目记录的 Schema 和数据版本信息。",
       "type": "object",
       "additionalProperties": false,
       "required": [
         "schemaVersion",
-        "recordVersion"
+        "recordVersion",
+        "createdAt",
+        "updatedAt"
       ],
       "properties": {
         "schemaVersion": {
-          "type": "string"
+          "description": "项目 Schema 版本。",
+          "type": "string",
+          "minLength": 1
         },
         "recordVersion": {
+          "description": "项目记录版本号。",
           "type": "integer",
           "minimum": 1
         },
         "createdAt": {
+          "description": "项目记录创建时间；模板或未知时为 null。",
           "type": [
             "string",
             "null"
@@ -275,6 +491,7 @@
           "format": "date-time"
         },
         "updatedAt": {
+          "description": "项目记录最后更新时间；模板或未知时为 null。",
           "type": [
             "string",
             "null"

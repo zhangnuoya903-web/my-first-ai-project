@@ -1,0 +1,28 @@
+{
+  "countryCode": "CN",
+  "chineseName": "中国",
+  "englishName": "China",
+  "region": "Asia",
+  "languages": [
+    {
+      "code": "zh-CN",
+      "name": "中文",
+      "isPrimary": true
+    }
+  ],
+  "currencies": [
+    {
+      "code": "CNY",
+      "name": "人民币",
+      "symbol": "¥",
+      "isPrimary": true
+    }
+  ],
+  "transportNotes": [],
+  "versionInfo": {
+    "schemaVersion": "1.0.0",
+    "recordVersion": 1,
+    "createdAt": null,
+    "updatedAt": null
+  }
+}

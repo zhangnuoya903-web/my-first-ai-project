@@ -1,0 +1,17 @@
+{
+  "customerId": "CUST-DEMO-001",
+  "name": "示例客户（非真实数据）",
+  "customerType": "other",
+  "contacts": [],
+  "countryCode": "CN",
+  "historicalProjectIds": [
+    "PRJ-DEMO-001"
+  ],
+  "status": "active",
+  "versionInfo": {
+    "schemaVersion": "1.0.0",
+    "recordVersion": 1,
+    "createdAt": null,
+    "updatedAt": null
+  }
+}

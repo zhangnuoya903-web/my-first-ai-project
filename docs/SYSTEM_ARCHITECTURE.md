@@ -18,7 +18,13 @@ data/
 ├── business-rules.json
 ├── weight-reference.json
 ├── smart-config.json
-└── quotation-schema.json
+├── quotation-schema.json
+├── customer-schema.json
+├── country-schema.json
+├── projects/
+├── customers/
+├── countries/
+└── templates/
 ```
 
 ## 模块职责
@@ -85,3 +91,12 @@ data/
 - 水工隧洞没有工程师确认重量时禁止自动估算与自动报价。
 - UI 仅复用现有参考重量控件和结果消息区域，不改变页面布局。
 - 报价引擎及其成本、利润、建议报价公式保持不变。
+
+
+## Module 03 项目知识库
+
+- 项目、客户和国家以独立 JSON 记录保存，并通过稳定 ID 建立关系。
+- 项目记录关联报价索引、智能配置和文件元数据。
+- 所有 Schema 字段使用中文 description。
+- 示例数据为非真实数据，未核价金额使用 null。
+- 知识库暂不接入 UI、Weight Engine 或 Quotation Engine。

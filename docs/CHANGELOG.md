@@ -2,6 +2,21 @@
 
 本项目的重大产品、业务规则和架构变更记录在此文件中。
 
+## Module 03 — LYGD Project Knowledge Base V1 — 2026-07-14
+
+### Added
+
+- 建立 projects、customers、countries 和 templates 知识库目录。
+- 新增客户与国家 JSON Schema，并扩展项目 Schema。
+- 新增脱敏项目、客户、国家示例和项目初始化模板。
+- 新增 DATA_MODEL 对象关系文档与知识库自动化测试。
+
+### Changed
+
+- README 增加项目知识库说明。
+- SYSTEM_ARCHITECTURE 同步知识库目录与边界。
+- 未修改 HTML、CSS、Weight Engine 或 Quotation Engine。
+
 ## Sprint 4 — Weight Engine V2 — 2026-07-14
 
 ### Added

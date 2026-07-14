@@ -1,0 +1,156 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://lygd.example/schemas/country-schema.json",
+  "title": "LYGD 项目知识库国家对象",
+  "description": "国家基础信息、语言、币种和运输备注。",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "countryCode",
+    "chineseName",
+    "englishName",
+    "region",
+    "languages",
+    "currencies",
+    "transportNotes",
+    "versionInfo"
+  ],
+  "properties": {
+    "countryCode": {
+      "description": "国家或地区两位代码。",
+      "type": "string",
+      "pattern": "^[A-Z]{2}$"
+    },
+    "chineseName": {
+      "description": "国家或地区中文名称。",
+      "type": "string",
+      "minLength": 1
+    },
+    "englishName": {
+      "description": "国家或地区英文名称。",
+      "type": "string",
+      "minLength": 1
+    },
+    "region": {
+      "description": "所属区域。",
+      "type": "string",
+      "minLength": 1
+    },
+    "languages": {
+      "description": "项目沟通可能使用的语言列表。",
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "description": "单个语言记录。",
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "code",
+          "name",
+          "isPrimary"
+        ],
+        "properties": {
+          "code": {
+            "description": "语言代码。",
+            "type": "string",
+            "minLength": 2
+          },
+          "name": {
+            "description": "语言中文名称。",
+            "type": "string",
+            "minLength": 1
+          },
+          "isPrimary": {
+            "description": "是否为主要沟通语言。",
+            "type": "boolean"
+          }
+        }
+      }
+    },
+    "currencies": {
+      "description": "国家或地区可能使用的币种列表。",
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "description": "单个币种记录。",
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "code",
+          "name",
+          "symbol",
+          "isPrimary"
+        ],
+        "properties": {
+          "code": {
+            "description": "三位币种代码。",
+            "type": "string",
+            "pattern": "^[A-Z]{3}$"
+          },
+          "name": {
+            "description": "币种中文名称。",
+            "type": "string",
+            "minLength": 1
+          },
+          "symbol": {
+            "description": "币种符号。",
+            "type": "string",
+            "minLength": 1
+          },
+          "isPrimary": {
+            "description": "是否为主要报价币种。",
+            "type": "boolean"
+          }
+        }
+      }
+    },
+    "transportNotes": {
+      "description": "国家或地区运输注意事项；未确认时使用空数组。",
+      "type": "array",
+      "items": {
+        "description": "单条运输备注。",
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "versionInfo": {
+      "description": "国家记录版本信息。",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schemaVersion",
+        "recordVersion",
+        "createdAt",
+        "updatedAt"
+      ],
+      "properties": {
+        "schemaVersion": {
+          "description": "国家 Schema 版本。",
+          "type": "string",
+          "minLength": 1
+        },
+        "recordVersion": {
+          "description": "国家记录版本号。",
+          "type": "integer",
+          "minimum": 1
+        },
+        "createdAt": {
+          "description": "国家记录创建时间；模板或未知时为 null。",
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "description": "国家记录最后更新时间；模板或未知时为 null。",
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        }
+      }
+    }
+  }
+}

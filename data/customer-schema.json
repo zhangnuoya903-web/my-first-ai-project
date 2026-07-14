@@ -1,0 +1,159 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://lygd.example/schemas/customer-schema.json",
+  "title": "LYGD 项目知识库客户对象",
+  "description": "客户基础信息、类型、联系方式、国家和历史项目关联。",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "customerId",
+    "name",
+    "customerType",
+    "contacts",
+    "countryCode",
+    "historicalProjectIds",
+    "status",
+    "versionInfo"
+  ],
+  "properties": {
+    "customerId": {
+      "description": "客户唯一编号。",
+      "type": "string",
+      "minLength": 1
+    },
+    "name": {
+      "description": "客户名称。",
+      "type": "string",
+      "minLength": 1
+    },
+    "customerType": {
+      "description": "客户类型。",
+      "type": "string",
+      "enum": [
+        "owner",
+        "contractor",
+        "distributor",
+        "design-institute",
+        "government",
+        "other"
+      ]
+    },
+    "contacts": {
+      "description": "客户联系方式列表；示例数据不得包含真实个人信息。",
+      "type": "array",
+      "items": {
+        "description": "单个客户联系人。",
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "name",
+          "role",
+          "phone",
+          "email",
+          "remark"
+        ],
+        "properties": {
+          "name": {
+            "description": "联系人姓名；未提供时为 null。",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "role": {
+            "description": "联系人角色或职务；未提供时为 null。",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "phone": {
+            "description": "联系电话；未提供时为 null。",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "email": {
+            "description": "联系邮箱；未提供时为 null。",
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "email"
+          },
+          "remark": {
+            "description": "联系方式备注；未提供时为 null。",
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      }
+    },
+    "countryCode": {
+      "description": "客户所在国家或地区两位代码，对应国家知识库。",
+      "type": "string",
+      "pattern": "^[A-Z]{2}$"
+    },
+    "historicalProjectIds": {
+      "description": "与客户关联的历史项目编号列表。",
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "description": "历史项目唯一编号。",
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "status": {
+      "description": "客户记录状态。",
+      "type": "string",
+      "enum": [
+        "active",
+        "inactive",
+        "archived"
+      ]
+    },
+    "versionInfo": {
+      "description": "客户记录版本信息。",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schemaVersion",
+        "recordVersion",
+        "createdAt",
+        "updatedAt"
+      ],
+      "properties": {
+        "schemaVersion": {
+          "description": "客户 Schema 版本。",
+          "type": "string",
+          "minLength": 1
+        },
+        "recordVersion": {
+          "description": "客户记录版本号。",
+          "type": "integer",
+          "minimum": 1
+        },
+        "createdAt": {
+          "description": "客户记录创建时间；模板或未知时为 null。",
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "description": "客户记录最后更新时间；模板或未知时为 null。",
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        }
+      }
+    }
+  }
+}
