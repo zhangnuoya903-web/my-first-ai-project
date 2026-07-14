@@ -1,0 +1,135 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://lygd.example/schemas/quotation-schema.json",
+  "title": "LYGD Tunnel Quotation",
+  "description": "报价结果对象，仅用于辅助分析，不能替代正式设计或审批。",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "costs",
+    "profit",
+    "quotation",
+    "currency",
+    "date",
+    "version"
+  ],
+  "properties": {
+    "id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "projectId": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "costs": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "steel",
+        "processing",
+        "hydraulic",
+        "electrical",
+        "transport",
+        "installation",
+        "smartConfiguration",
+        "other",
+        "total"
+      ],
+      "properties": {
+        "steel": {
+          "type": "number",
+          "minimum": 0
+        },
+        "processing": {
+          "type": "number",
+          "minimum": 0
+        },
+        "hydraulic": {
+          "type": "number",
+          "minimum": 0
+        },
+        "electrical": {
+          "type": "number",
+          "minimum": 0
+        },
+        "transport": {
+          "type": "number",
+          "minimum": 0
+        },
+        "installation": {
+          "type": "number",
+          "minimum": 0
+        },
+        "smartConfiguration": {
+          "type": "number",
+          "minimum": 0
+        },
+        "other": {
+          "type": "number",
+          "minimum": 0
+        },
+        "total": {
+          "type": "number",
+          "minimum": 0
+        }
+      }
+    },
+    "profit": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "rate",
+        "amount"
+      ],
+      "properties": {
+        "rate": {
+          "type": "number",
+          "minimum": 0
+        },
+        "amount": {
+          "type": "number",
+          "minimum": 0
+        }
+      }
+    },
+    "quotation": {
+      "type": "number",
+      "minimum": 0
+    },
+    "currency": {
+      "type": "string",
+      "pattern": "^[A-Z]{3}$"
+    },
+    "date": {
+      "type": "string",
+      "format": "date"
+    },
+    "version": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "ruleSetVersion": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "draft",
+        "review",
+        "approved",
+        "rejected"
+      ]
+    },
+    "disclaimer": {
+      "type": "string"
+    }
+  }
+}

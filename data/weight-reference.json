@@ -1,0 +1,59 @@
+{
+  "schemaVersion": "1.0.0",
+  "databaseType": "historical-experience",
+  "unit": "ton",
+  "disclaimer": "所有重量均为经验参考，不得替代正式设计；工程师确认重量优先。",
+  "railway": [
+    {
+      "length": 9,
+      "referenceWeight": null,
+      "status": "pending",
+      "source": null,
+      "requiresManualConfirmation": true,
+      "remark": "暂无经批准参考重量，不得自动推算"
+    },
+    {
+      "length": 10.5,
+      "referenceWeight": null,
+      "status": "pending",
+      "source": null,
+      "requiresManualConfirmation": true,
+      "remark": "暂无经批准参考重量，不得自动推算"
+    },
+    {
+      "length": 12,
+      "referenceWeight": 124,
+      "status": "verified",
+      "source": "LYGD历史项目",
+      "requiresManualConfirmation": false,
+      "ruleId": "BR-0001",
+      "remark": "机械主体经验参考重量"
+    }
+  ],
+  "derivedModels": {
+    "highway": {
+      "baseTunnelType": "railway",
+      "referenceRatio": 0.76,
+      "approximate": true,
+      "ruleId": "BR-0002",
+      "remark": "仅在存在同长度铁路参考重量时可形成经验参考"
+    },
+    "metro": {
+      "baseTunnelType": "railway",
+      "referenceRatio": 0.5,
+      "approximate": true,
+      "ruleId": "BR-0003",
+      "remark": "仅在存在同长度铁路参考重量时可形成经验参考"
+    }
+  },
+  "hydraulic": {
+    "autoEstimationAllowed": false,
+    "requiresManualConfirmation": true,
+    "ruleId": "BR-0004",
+    "remark": "禁止自动估重"
+  },
+  "precedence": {
+    "confirmedWeightFirst": true,
+    "ruleId": "BR-0005"
+  }
+}

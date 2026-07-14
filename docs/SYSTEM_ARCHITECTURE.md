@@ -13,6 +13,12 @@ js/
 ├── quotation-engine.js
 ├── ui-controller.js
 └── storage.js
+data/
+├── project-schema.json
+├── business-rules.json
+├── weight-reference.json
+├── smart-config.json
+└── quotation-schema.json
 ```
 
 ## 模块职责
@@ -60,3 +66,12 @@ js/
 - UI 控件与模块输入必须进行契约检查。
 - 重大架构变更必须更新本文件与 CHANGELOG。
 - 正式部署前需要权限、数据备份、错误监控和审批机制。
+
+
+## Sprint 3 数据基础
+
+- `project-schema.json` 和 `quotation-schema.json` 使用 JSON Schema Draft 2020-12 描述核心对象。
+- `business-rules.json` 保存带编号、优先级、来源、状态和备注的机器可读规则。
+- `weight-reference.json` 明确区分已验证、待确认、比例参考和禁止自动估重。
+- `smart-config.json` 中的零价格是未核价占位值，不代表免费或批准价格。
+- Sprint 3 不将这些文件接入现有页面，因此 Sprint 2 的数据流和公式保持不变。

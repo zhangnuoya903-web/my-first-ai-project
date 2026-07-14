@@ -1,0 +1,287 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://lygd.example/schemas/project-schema.json",
+  "title": "LYGD Tunnel Project",
+  "description": "隧道二衬台车项目数据对象。重量字段区分经验参考与工程师确认。",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "project",
+    "customer",
+    "country",
+    "currency",
+    "tunnelParameters",
+    "trolleyParameters",
+    "quotationParameters",
+    "smartConfigurations",
+    "versionInfo"
+  ],
+  "properties": {
+    "project": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "quotationType": {
+          "type": "string",
+          "enum": [
+            "domestic",
+            "overseas"
+          ]
+        }
+      }
+    },
+    "customer": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "country": {
+      "type": "string",
+      "minLength": 1
+    },
+    "currency": {
+      "type": "string",
+      "pattern": "^[A-Z]{3}$"
+    },
+    "tunnelParameters": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "tunnelType"
+      ],
+      "properties": {
+        "tunnelType": {
+          "type": "string",
+          "enum": [
+            "railway",
+            "highway",
+            "metro",
+            "hydraulic"
+          ]
+        },
+        "maximumWidth": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "maximumHeight": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "liningThicknessCm": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "minimumCurveRadius": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0
+        }
+      }
+    },
+    "trolleyParameters": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "length",
+        "structureLevel"
+      ],
+      "properties": {
+        "length": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "radius": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "structureLevel": {
+          "type": "string",
+          "enum": [
+            "standard",
+            "reinforced",
+            "heavy"
+          ]
+        },
+        "referenceWeight": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0,
+          "description": "历史经验参考重量，不是设计重量"
+        },
+        "confirmedWeight": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0,
+          "description": "工程师确认重量，优先于参考重量"
+        },
+        "weightSource": {
+          "type": "string",
+          "enum": [
+            "historical-reference",
+            "engineer-confirmed",
+            "manual-required",
+            "unavailable"
+          ]
+        },
+        "manualCorrectionReason": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "quotationParameters": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "steelPrice",
+        "processingPrice",
+        "hydraulicCost",
+        "electricalCost",
+        "transportCost",
+        "installationCost",
+        "otherCost",
+        "profitRate"
+      ],
+      "properties": {
+        "steelPrice": {
+          "type": "number",
+          "minimum": 0
+        },
+        "processingPrice": {
+          "type": "number",
+          "minimum": 0
+        },
+        "hydraulicCost": {
+          "type": "number",
+          "minimum": 0
+        },
+        "electricalCost": {
+          "type": "number",
+          "minimum": 0
+        },
+        "transportCost": {
+          "type": "number",
+          "minimum": 0
+        },
+        "installationCost": {
+          "type": "number",
+          "minimum": 0
+        },
+        "otherCost": {
+          "type": "number",
+          "minimum": 0
+        },
+        "profitRate": {
+          "type": "number",
+          "minimum": 0
+        }
+      }
+    },
+    "smartConfigurations": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "configId",
+          "selected"
+        ],
+        "properties": {
+          "configId": {
+            "type": "string",
+            "pattern": "^SC-[0-9]{4}$"
+          },
+          "selected": {
+            "type": "boolean"
+          },
+          "approvedPrice": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "minimum": 0
+          }
+        }
+      }
+    },
+    "versionInfo": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schemaVersion",
+        "recordVersion"
+      ],
+      "properties": {
+        "schemaVersion": {
+          "type": "string"
+        },
+        "recordVersion": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "createdAt": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        }
+      }
+    }
+  }
+}

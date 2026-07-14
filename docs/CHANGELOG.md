@@ -2,6 +2,23 @@
 
 本项目的重大产品、业务规则和架构变更记录在此文件中。
 
+## Sprint 3 — Data Model + Business Rules Foundation — 2026-07-14
+
+### Added
+
+- 建立项目与报价 JSON Schema。
+- 建立带规则编号的机器可读业务规则。
+- 建立重量参考数据，铁路 9m 与 10.5m 明确为待确认，12m 为 124 吨经验参考。
+- 建立公路约 76%、地铁约 50% 的比例参考以及水工禁止自动估重规则。
+- 建立 5 项智能配置目录，价格 0 明确为未核价占位值。
+
+### Changed
+
+- README 增加 data 目录说明。
+- BUSINESS_RULES 同步 BR-0001 至 BR-0009。
+- SYSTEM_ARCHITECTURE 和 SPRINT_PLAN 同步 Sprint 3 数据基础。
+- 未修改 HTML、CSS 或 JavaScript 业务代码；未接入现有计算流程。
+
 ## Sprint 0 — Project Governance — 2026-07-14
 
 ### Added

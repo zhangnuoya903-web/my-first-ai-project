@@ -1,0 +1,48 @@
+{
+  "schemaVersion": "1.0.0",
+  "currency": "CNY",
+  "pricingRuleId": "BR-0007",
+  "disclaimer": "defaultPrice为未核价占位值，不代表免费、正式报价或已批准价格。",
+  "items": [
+    {
+      "id": "SC-0001",
+      "code": "autoDistributor",
+      "name": "自动布料机",
+      "defaultPrice": 0,
+      "priceStatus": "pending-verification",
+      "enabledByDefault": false
+    },
+    {
+      "id": "SC-0002",
+      "code": "internalVibrator",
+      "name": "插入式振捣器",
+      "defaultPrice": 0,
+      "priceStatus": "pending-verification",
+      "enabledByDefault": false
+    },
+    {
+      "id": "SC-0003",
+      "code": "visualEndForm",
+      "name": "可视化堵头模",
+      "defaultPrice": 0,
+      "priceStatus": "pending-verification",
+      "enabledByDefault": false
+    },
+    {
+      "id": "SC-0004",
+      "code": "antiBurstDevice",
+      "name": "防爆模装置",
+      "defaultPrice": 0,
+      "priceStatus": "pending-verification",
+      "enabledByDefault": false
+    },
+    {
+      "id": "SC-0005",
+      "code": "softOverlap",
+      "name": "软搭接系统",
+      "defaultPrice": 0,
+      "priceStatus": "pending-verification",
+      "enabledByDefault": false
+    }
+  ]
+}

@@ -1,0 +1,153 @@
+{
+  "schemaVersion": "1.0.0",
+  "platform": "LYGD AI Tunnel Platform",
+  "updatedAt": "2026-07-14",
+  "rules": [
+    {
+      "id": "BR-0001",
+      "category": "weight",
+      "title": "铁路12米机械主体参考重量",
+      "conditions": {
+        "tunnelType": "railway",
+        "length": 12
+      },
+      "result": {
+        "referenceWeight": 124,
+        "unit": "ton"
+      },
+      "priority": 100,
+      "source": "LYGD历史项目",
+      "status": "verified",
+      "remark": "仅作为经验参考，不得替代正式设计"
+    },
+    {
+      "id": "BR-0002",
+      "category": "weight",
+      "title": "公路台车参考铁路重量比例",
+      "conditions": {
+        "tunnelType": "highway",
+        "baseTunnelType": "railway"
+      },
+      "result": {
+        "referenceRatio": 0.76,
+        "approximate": true
+      },
+      "priority": 90,
+      "source": "LYGD历史项目",
+      "status": "verified",
+      "remark": "约为同条件铁路台车参考重量的76%，不得视为精确设计系数"
+    },
+    {
+      "id": "BR-0003",
+      "category": "weight",
+      "title": "地铁台车参考铁路重量比例",
+      "conditions": {
+        "tunnelType": "metro",
+        "baseTunnelType": "railway"
+      },
+      "result": {
+        "referenceRatio": 0.5,
+        "approximate": true
+      },
+      "priority": 90,
+      "source": "LYGD历史项目",
+      "status": "verified",
+      "remark": "约为同条件铁路台车参考重量的50%，不得视为精确设计系数"
+    },
+    {
+      "id": "BR-0004",
+      "category": "weight",
+      "title": "水工隧洞禁止自动估重",
+      "conditions": {
+        "tunnelType": "hydraulic"
+      },
+      "result": {
+        "autoEstimationAllowed": false,
+        "engineerConfirmationRequired": true
+      },
+      "priority": 1000,
+      "source": "LYGD业务规则",
+      "status": "verified",
+      "remark": "水工隧洞重量必须人工确认"
+    },
+    {
+      "id": "BR-0005",
+      "category": "weight",
+      "title": "工程师确认重量优先",
+      "conditions": {
+        "confirmedWeightAvailable": true
+      },
+      "result": {
+        "weightSource": "engineer-confirmed"
+      },
+      "priority": 1000,
+      "source": "LYGD业务规则",
+      "status": "verified",
+      "remark": "工程师确认重量优先于经验数据库参考重量"
+    },
+    {
+      "id": "BR-0006",
+      "category": "governance",
+      "title": "重量数据库属于经验数据库",
+      "conditions": {
+        "dataType": "weight-reference"
+      },
+      "result": {
+        "classification": "historical-experience",
+        "designWeight": false
+      },
+      "priority": 1000,
+      "source": "LYGD业务规则",
+      "status": "verified",
+      "remark": "经验重量不得表述为设计重量"
+    },
+    {
+      "id": "BR-0007",
+      "category": "pricing",
+      "title": "智能配置单独计价",
+      "conditions": {
+        "configurationType": "smart"
+      },
+      "result": {
+        "pricingMode": "separate"
+      },
+      "priority": 100,
+      "source": "LYGD业务规则",
+      "status": "verified",
+      "remark": "未取得批准价格时不得虚构价格"
+    },
+    {
+      "id": "BR-0008",
+      "category": "override",
+      "title": "非标产品允许人工修正",
+      "conditions": {
+        "productType": "non-standard"
+      },
+      "result": {
+        "manualOverrideAllowed": true,
+        "reasonRequired": true,
+        "reviewRequired": true
+      },
+      "priority": 100,
+      "source": "LYGD业务规则",
+      "status": "verified",
+      "remark": "人工修正必须保留依据并接受复核"
+    },
+    {
+      "id": "BR-0009",
+      "category": "disclaimer",
+      "title": "报价不能替代正式设计",
+      "conditions": {
+        "outputType": "quotation"
+      },
+      "result": {
+        "formalDesign": false,
+        "approvalRequired": true
+      },
+      "priority": 1000,
+      "source": "LYGD业务规则",
+      "status": "verified",
+      "remark": "建议报价仅用于内部辅助分析"
+    }
+  ]
+}
