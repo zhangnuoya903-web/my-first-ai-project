@@ -148,6 +148,62 @@
       "source": "LYGD业务规则",
       "status": "verified",
       "remark": "建议报价仅用于内部辅助分析"
+    },
+    {
+      "id": "BR-0010",
+      "category": "weight",
+      "title": "铁路重量按12米基准进行长度比例建议",
+      "conditions": {
+        "tunnelType": "railway",
+        "baseLength": 12,
+        "baseReferenceWeight": 124
+      },
+      "result": {
+        "method": "length-proportional",
+        "supportedLengths": [
+          9,
+          10.5,
+          12
+        ]
+      },
+      "priority": 80,
+      "source": "Sprint 4已批准规则",
+      "status": "verified",
+      "remark": "9m约93吨，10.5m约108.5吨；结果均为历史经验参考"
+    },
+    {
+      "id": "BR-0011",
+      "category": "risk",
+      "title": "非标准长度必须工程师复核",
+      "conditions": {
+        "lengthNotIn": [
+          9,
+          10.5,
+          12
+        ]
+      },
+      "result": {
+        "engineerReviewRequired": true
+      },
+      "priority": 1000,
+      "source": "Sprint 4已批准规则",
+      "status": "verified",
+      "remark": "可以生成经验建议，但不得跳过工程师复核"
+    },
+    {
+      "id": "BR-0012",
+      "category": "disclaimer",
+      "title": "参考重量必须显示经验免责声明",
+      "conditions": {
+        "weightSource": "historical-or-derived-reference"
+      },
+      "result": {
+        "warning": "历史经验参考，不替代正式设计"
+      },
+      "priority": 1000,
+      "source": "Sprint 4已批准规则",
+      "status": "verified",
+      "remark": "所有自动重量建议必须显示该提示"
     }
   ]
 }

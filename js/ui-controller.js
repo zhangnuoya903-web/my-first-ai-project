@@ -107,7 +107,7 @@ export function createUiController() {
   /**
    * 将报价引擎的结果写回现有结果控件。
    */
-  function renderResult(input, result) {
+  function renderResult(input, result, warning = '') {
     elements.equipmentName.textContent =
       input.projectName ||
       `${input.tunnelTypeLabel}二衬台车（${input.trolleyLength}米）`;
@@ -121,7 +121,28 @@ export function createUiController() {
     elements.resultTotalCost.textContent = formatCurrency(result.totalCost);
     elements.resultProfit.textContent = formatCurrency(result.profit);
     elements.resultQuotation.textContent = formatCurrency(result.quotation);
-    elements.resultMessage.textContent = '报价分析已生成。';
+    elements.resultMessage.textContent =
+      `报价分析已生成。${warning ? ` ${warning}` : ''}`;
+  }
+
+  /**
+   * 将重量建议写入现有参考重量控件。
+   */
+  function renderWeightRecommendation(recommendation) {
+    elements.referenceWeight.value =
+      recommendation.confidence === 'engineer-confirmed' ||
+      recommendation.referenceWeight === null
+        ? ''
+        : recommendation.referenceWeight;
+  }
+
+  /**
+   * 阻止没有有效建议重量的报价，并显示风险提示。
+   */
+  function renderBlockedRecommendation(recommendation) {
+    resetResult();
+    elements.referenceWeight.value = '';
+    elements.resultMessage.textContent = recommendation.warning;
   }
 
   /**
@@ -176,6 +197,8 @@ export function createUiController() {
 
   return {
     bindEvents,
-    renderResult
+    renderResult,
+    renderWeightRecommendation,
+    renderBlockedRecommendation
   };
 }

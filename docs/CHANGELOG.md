@@ -2,6 +2,22 @@
 
 本项目的重大产品、业务规则和架构变更记录在此文件中。
 
+## Sprint 4 — Weight Engine V2 — 2026-07-14
+
+### Added
+
+- 新增 `getWeightRecommendation()`，返回 referenceWeight、range、confidence、source 和 warning。
+- 新增铁路 9m≈93 吨、10.5m≈108.5 吨及 12m=124 吨建议测试。
+- 新增公路 12m=94.24 吨、地铁 12m=62 吨及水工阻断测试。
+- 新增 BR-0010 至 BR-0012，覆盖长度比例、非标准长度复核和经验免责声明。
+
+### Changed
+
+- app 与 UI 控制器接入重量建议，不改变页面布局。
+- 完善 weight-reference 数据并保留工程师确认重量优先。
+- 水工无确认重量时禁止自动估算和自动报价。
+- 报价计算引擎及公式未修改。
+
 ## Sprint 3 — Data Model + Business Rules Foundation — 2026-07-14
 
 ### Added

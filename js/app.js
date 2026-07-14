@@ -1,25 +1,33 @@
-import { resolveWeight } from './weight-engine.js';
+import { getWeightRecommendation } from './weight-engine.js';
 import { calculateQuotation } from './quotation-engine.js';
 import { createUiController } from './ui-controller.js';
 
 /**
- * 初始化报价页面并连接 UI、重量和报价模块。
+ * 初始化报价页面并连接 UI、重量建议和报价模块。
  */
 function initializeApplication() {
   const uiController = createUiController();
 
   uiController.bindEvents((input) => {
-    const weight = resolveWeight({
+    const recommendation = getWeightRecommendation({
       tunnelType: input.tunnelType,
-      referenceWeight: input.referenceWeight,
+      length: input.trolleyLength,
       confirmedWeight: input.confirmedWeight
     });
+
+    uiController.renderWeightRecommendation(recommendation);
+
+    if (recommendation.referenceWeight === null) {
+      uiController.renderBlockedRecommendation(recommendation);
+      return;
+    }
+
     const result = calculateQuotation({
       ...input,
-      weight
+      weight: recommendation.referenceWeight
     });
 
-    uiController.renderResult(input, result);
+    uiController.renderResult(input, result, recommendation.warning);
   });
 }
 

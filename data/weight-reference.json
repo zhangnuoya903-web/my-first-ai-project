@@ -2,23 +2,25 @@
   "schemaVersion": "1.0.0",
   "databaseType": "historical-experience",
   "unit": "ton",
-  "disclaimer": "所有重量均为经验参考，不得替代正式设计；工程师确认重量优先。",
+  "disclaimer": "历史经验参考，不替代正式设计",
   "railway": [
     {
       "length": 9,
-      "referenceWeight": null,
-      "status": "pending",
-      "source": null,
+      "referenceWeight": 93,
+      "status": "derived",
+      "source": "铁路12m=124吨按长度比例推算",
       "requiresManualConfirmation": true,
-      "remark": "暂无经批准参考重量，不得自动推算"
+      "ruleId": "BR-0010",
+      "remark": "历史经验参考，不替代正式设计"
     },
     {
       "length": 10.5,
-      "referenceWeight": null,
-      "status": "pending",
-      "source": null,
+      "referenceWeight": 108.5,
+      "status": "derived",
+      "source": "铁路12m=124吨按长度比例推算",
       "requiresManualConfirmation": true,
-      "remark": "暂无经批准参考重量，不得自动推算"
+      "ruleId": "BR-0010",
+      "remark": "历史经验参考，不替代正式设计"
     },
     {
       "length": 12,
@@ -27,7 +29,7 @@
       "source": "LYGD历史项目",
       "requiresManualConfirmation": false,
       "ruleId": "BR-0001",
-      "remark": "机械主体经验参考重量"
+      "remark": "机械主体历史经验参考，不替代正式设计"
     }
   ],
   "derivedModels": {
@@ -55,5 +57,18 @@
   "precedence": {
     "confirmedWeightFirst": true,
     "ruleId": "BR-0005"
-  }
+  },
+  "railwayModel": {
+    "baseLength": 12,
+    "baseReferenceWeight": 124,
+    "method": "length-proportional",
+    "ruleId": "BR-0010",
+    "standardLengths": [
+      9,
+      10.5,
+      12
+    ],
+    "nonStandardLengthWarningRuleId": "BR-0011"
+  },
+  "disclaimerRuleId": "BR-0012"
 }
