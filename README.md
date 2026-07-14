@@ -1,13 +1,45 @@
-# 小猫抓鱼动画网页
+# LYGD AI Tunnel Platform
 
-这是一个使用 HTML、CSS 和 JavaScript 制作的简单互动动画网页。点击鱼缸中的小鱼后，小猫会移动到小鱼的位置并播放抓鱼动画，抓到后小鱼会随机换到新的位置。
+LYGD AI Tunnel Platform 是面向隧道二衬台车非标项目的方案、经验重量、成本和商务报价辅助平台。
 
-## 文件作用
+## 项目定位
 
-- `index.html`：页面结构文件，包含标题、说明文字、小猫、小鱼、分数和操作按钮。
-- `styles.css`：页面样式和动画文件，负责鱼缸背景、小猫造型、小鱼造型、移动过渡、游动和抓鱼动画效果。
-- `script.js`：交互逻辑文件，负责随机放置小鱼、让小猫移动到鱼的位置、更新抓鱼分数和提示文字。
+平台用于统一项目参数、经验数据和报价过程，帮助工程师与商务人员形成可追溯的报价分析。平台是辅助工具，不替代工程设计、结构验算、正式报价审批或合同评审。
 
-## 使用方式
+## 版本号
 
-直接在浏览器中打开 `index.html` 即可运行。
+- 当前业务页面：V2.0
+- 当前治理与开发基线：V2.1（开发中）
+- 已完成工程阶段：Sprint 1、Sprint 2
+- 当前治理阶段：Sprint 0 — Project Governance
+
+版本记录见 [docs/CHANGELOG.md](docs/CHANGELOG.md)。
+
+## 开发流程
+
+1. 每个 Sprint 开始前确认目标、范围、业务规则和验收条件。
+2. 开发前阅读根目录 [AGENTS.md](AGENTS.md) 及 [docs/BUSINESS_RULES.md](docs/BUSINESS_RULES.md)。
+3. 不得在缺少业务依据时新增价格、重量系数或设计结论。
+4. 实现完成后执行与风险相匹配的测试。
+5. 每个 Sprint 必须报告修改文件、测试结果和已知问题。
+6. 重大修改必须同步更新 [docs/CHANGELOG.md](docs/CHANGELOG.md)。
+7. 经人工审核后才能进入下一 Sprint。
+
+## 文档目录
+
+- [项目章程](docs/PROJECT_CHARTER.md)
+- [产品愿景](docs/PRODUCT_VISION.md)
+- [产品路线图](docs/PRODUCT_ROADMAP.md)
+- [业务规则](docs/BUSINESS_RULES.md)
+- [系统架构](docs/SYSTEM_ARCHITECTURE.md)
+- [Sprint 计划](docs/SPRINT_PLAN.md)
+- [变更日志](docs/CHANGELOG.md)
+- [AI 开发约束](AGENTS.md)
+
+## 当前运行方式
+
+通过 HTTP 静态服务器访问项目根目录并打开 `index.html`。页面使用 ES Modules，不建议直接通过 `file://` 协议运行。
+
+## 免责声明
+
+本平台中的重量数据属于历史经验参考，不能视为设计重量、施工图结论或结构安全依据。系统生成的成本与建议报价仅用于内部分析，不构成正式设计、正式报价、合同承诺或法律意见。所有非标设备参数、重量、价格和商务条件必须由有权限的工程师及业务负责人复核确认。
