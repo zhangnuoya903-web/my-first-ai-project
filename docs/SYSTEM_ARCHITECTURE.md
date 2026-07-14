@@ -20,9 +20,11 @@ data/
 ├── smart-config.json
 ├── quotation-schema.json
 ├── customer-schema.json
+├── opportunity-schema.json
 ├── country-schema.json
 ├── projects/
 ├── customers/
+├── opportunities/
 ├── countries/
 └── templates/
 ```
@@ -100,3 +102,11 @@ data/
 - 所有 Schema 字段使用中文 description。
 - 示例数据为非真实数据，未核价金额使用 null。
 - 知识库暂不接入 UI、Weight Engine 或 Quotation Engine。
+
+
+## Module 04 CRM 数据基础
+
+- Customer 以 customerId 关联历史项目和商机。
+- Opportunity 以 customerId、countryCode 关联客户与国家，并可在转为项目后记录 projectId。
+- 销售阶段是受控枚举；预计金额不是正式报价。
+- CRM 不接 UI、外部 API，也不参与 Weight Engine 或 Quotation Engine 计算。

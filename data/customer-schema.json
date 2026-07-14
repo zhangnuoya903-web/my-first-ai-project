@@ -1,13 +1,13 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://lygd.example/schemas/customer-schema.json",
-  "title": "LYGD 项目知识库客户对象",
-  "description": "客户基础信息、类型、联系方式、国家和历史项目关联。",
+  "title": "LYGD CRM 客户对象",
+  "description": "客户编号、公司名称、国家、客户类型、联系人、联系方式和历史项目关联。",
   "type": "object",
   "additionalProperties": false,
   "required": [
     "customerId",
-    "name",
+    "companyName",
     "customerType",
     "contacts",
     "countryCode",
@@ -21,10 +21,22 @@
       "type": "string",
       "minLength": 1
     },
-    "name": {
-      "description": "客户名称。",
+    "companyName": {
+      "description": "客户公司正式名称；示例数据必须标记为非真实数据。",
       "type": "string",
       "minLength": 1
+    },
+    "name": {
+      "description": "兼容项目知识库的客户名称别名；建议与 companyName 保持一致。",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "countryCode": {
+      "description": "客户所在国家或地区两位代码，对应国家知识库。",
+      "type": "string",
+      "pattern": "^[A-Z]{2}$"
     },
     "customerType": {
       "description": "客户类型。",
@@ -39,51 +51,78 @@
       ]
     },
     "contacts": {
-      "description": "客户联系方式列表；示例数据不得包含真实个人信息。",
+      "description": "客户联系人及联系方式列表；公开示例不得包含真实个人信息。",
       "type": "array",
       "items": {
-        "description": "单个客户联系人。",
+        "description": "单个客户联系人记录。",
         "type": "object",
         "additionalProperties": false,
         "required": [
+          "contactId",
           "name",
           "role",
           "phone",
           "email",
+          "wechat",
+          "whatsapp",
+          "isPrimary",
           "remark"
         ],
         "properties": {
+          "contactId": {
+            "description": "联系人唯一编号。",
+            "type": "string",
+            "minLength": 1
+          },
           "name": {
-            "description": "联系人姓名；未提供时为 null。",
+            "description": "联系人姓名；未知时为 null。",
             "type": [
               "string",
               "null"
             ]
           },
           "role": {
-            "description": "联系人角色或职务；未提供时为 null。",
+            "description": "联系人角色或职务；未知时为 null。",
             "type": [
               "string",
               "null"
             ]
           },
           "phone": {
-            "description": "联系电话；未提供时为 null。",
+            "description": "联系电话；未知时为 null。",
             "type": [
               "string",
               "null"
             ]
           },
           "email": {
-            "description": "联系邮箱；未提供时为 null。",
+            "description": "联系邮箱；未知时为 null。",
             "type": [
               "string",
               "null"
             ],
             "format": "email"
           },
+          "wechat": {
+            "description": "微信联系方式；未知时为 null。",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "whatsapp": {
+            "description": "WhatsApp 联系方式；未知时为 null。",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "isPrimary": {
+            "description": "是否为该客户的主要联系人。",
+            "type": "boolean"
+          },
           "remark": {
-            "description": "联系方式备注；未提供时为 null。",
+            "description": "联系人备注；未知时为 null。",
             "type": [
               "string",
               "null"
@@ -91,11 +130,6 @@
           }
         }
       }
-    },
-    "countryCode": {
-      "description": "客户所在国家或地区两位代码，对应国家知识库。",
-      "type": "string",
-      "pattern": "^[A-Z]{2}$"
     },
     "historicalProjectIds": {
       "description": "与客户关联的历史项目编号列表。",

@@ -1,0 +1,255 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://lygd.example/schemas/opportunity-schema.json",
+  "title": "LYGD CRM 项目商机对象",
+  "description": "客户关联的隧道台车项目商机、销售阶段、预计金额和下一步行动。",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "opportunityId",
+    "projectName",
+    "countryCode",
+    "customerId",
+    "tunnelType",
+    "trolleyRequirements",
+    "stage",
+    "estimatedAmount",
+    "nextAction",
+    "status",
+    "versionInfo"
+  ],
+  "properties": {
+    "opportunityId": {
+      "description": "商机唯一编号。",
+      "type": "string",
+      "minLength": 1
+    },
+    "projectName": {
+      "description": "商机对应的项目名称。",
+      "type": "string",
+      "minLength": 1
+    },
+    "countryCode": {
+      "description": "项目所在国家或地区两位代码，对应国家知识库。",
+      "type": "string",
+      "pattern": "^[A-Z]{2}$"
+    },
+    "customerId": {
+      "description": "关联客户编号，对应 customers 目录中的 customerId。",
+      "type": "string",
+      "minLength": 1
+    },
+    "projectId": {
+      "description": "商机转为正式项目后的项目编号；未转换时为 null。",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "tunnelType": {
+      "description": "商机涉及的隧道类型。",
+      "type": "string",
+      "enum": [
+        "railway",
+        "highway",
+        "metro",
+        "hydraulic"
+      ]
+    },
+    "trolleyRequirements": {
+      "description": "客户提出的台车需求。",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "length",
+        "quantity",
+        "configurationIds",
+        "notes"
+      ],
+      "properties": {
+        "length": {
+          "description": "需求台车长度，单位为米；未知时为 null。",
+          "type": [
+            "number",
+            "null"
+          ],
+          "exclusiveMinimum": 0
+        },
+        "quantity": {
+          "description": "需求数量；未知时为 null。",
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 1
+        },
+        "configurationIds": {
+          "description": "需求智能配置编号列表。",
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "description": "智能配置编号，对应 smart-config.json。",
+            "type": "string",
+            "pattern": "^SC-[0-9]{4}$"
+          }
+        },
+        "notes": {
+          "description": "其他台车需求说明；未知时为空数组。",
+          "type": "array",
+          "items": {
+            "description": "单条需求说明。",
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "stage": {
+      "description": "当前销售阶段。",
+      "type": "string",
+      "enum": [
+        "lead",
+        "contacted",
+        "technical_discussion",
+        "quotation_sent",
+        "negotiation",
+        "won",
+        "lost"
+      ]
+    },
+    "estimatedAmount": {
+      "description": "商机预计金额，不等于正式报价。",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "amount",
+        "currency",
+        "status"
+      ],
+      "properties": {
+        "amount": {
+          "description": "预计金额；没有可靠依据时为 null。",
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "currency": {
+          "description": "预计金额币种代码。",
+          "type": "string",
+          "pattern": "^[A-Z]{3}$"
+        },
+        "status": {
+          "description": "预计金额的核实状态。",
+          "type": "string",
+          "enum": [
+            "unverified",
+            "estimated",
+            "confirmed"
+          ]
+        }
+      }
+    },
+    "nextAction": {
+      "description": "商机下一步行动。",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "action",
+        "dueDate",
+        "owner",
+        "status"
+      ],
+      "properties": {
+        "action": {
+          "description": "下一步行动内容；尚未制定时为 null。",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "dueDate": {
+          "description": "行动计划日期；尚未安排时为 null。",
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date"
+        },
+        "owner": {
+          "description": "行动责任人或角色；尚未分配时为 null。",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "status": {
+          "description": "行动状态。",
+          "type": "string",
+          "enum": [
+            "pending",
+            "in_progress",
+            "completed",
+            "cancelled"
+          ]
+        }
+      }
+    },
+    "lossReason": {
+      "description": "商机失败原因；非 lost 阶段或未知时为 null。",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "status": {
+      "description": "商机记录状态。",
+      "type": "string",
+      "enum": [
+        "active",
+        "closed",
+        "archived"
+      ]
+    },
+    "versionInfo": {
+      "description": "商机记录版本信息。",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schemaVersion",
+        "recordVersion",
+        "createdAt",
+        "updatedAt"
+      ],
+      "properties": {
+        "schemaVersion": {
+          "description": "商机 Schema 版本。",
+          "type": "string",
+          "minLength": 1
+        },
+        "recordVersion": {
+          "description": "商机记录版本号。",
+          "type": "integer",
+          "minimum": 1
+        },
+        "createdAt": {
+          "description": "商机记录创建时间；示例或未知时为 null。",
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "description": "商机记录最后更新时间；示例或未知时为 null。",
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        }
+      }
+    }
+  }
+}

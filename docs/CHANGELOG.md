@@ -2,6 +2,20 @@
 
 本项目的重大产品、业务规则和架构变更记录在此文件中。
 
+## Module 04 — AI Customer & Project CRM V1 — 2026-07-14
+
+### Added
+
+- 新增 opportunity-schema 和商机示例目录。
+- 扩展 Customer 模型以支持公司名称和多渠道联系方式。
+- 建立七个受控销售阶段。
+- 新增海外项目 SALES_RULES 和 CRM 自动化测试。
+
+### Changed
+
+- README、DATA_MODEL 和 SYSTEM_ARCHITECTURE 同步 CRM 数据关系。
+- 未修改 UI、Weight Engine、Quotation Engine 或 Project Knowledge Base 项目模型。
+
 ## Module 03 — LYGD Project Knowledge Base V1 — 2026-07-14
 
 ### Added

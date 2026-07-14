@@ -11,12 +11,15 @@ data/
 ├── project-schema.json
 ├── customer-schema.json
 ├── country-schema.json
+├── opportunity-schema.json
 ├── projects/
 │   └── example-project.json
 ├── customers/
 │   └── example-customer.json
 ├── countries/
 │   └── example-country.json
+├── opportunities/
+│   └── example-opportunity.json
 └── templates/
     └── project-template.json
 ```
@@ -26,8 +29,10 @@ data/
 ```text
 Country (countryCode)
   ├── 1:N Customer (countryCode)
-  │       └── 1:N Project (customer.id)
-  └── 1:N Project (country)
+  │       ├── 1:N Project (customer.id)
+  │       └── 1:N Opportunity (customerId)
+  ├── 1:N Project (country)
+  └── 1:N Opportunity (countryCode)
 
 Project
   ├── 1:N Quotation index (quotations)
@@ -70,3 +75,8 @@ Project
 - 工程师确认重量优先。
 - 知识库当前不接入 UI，也不参与现有计算。
 - 实际数据入库前必须执行 Schema 校验和人工审核。
+
+
+## CRM 商机对象
+
+商机通过 customerId 关联客户、通过 countryCode 关联国家；商机转为正式项目后可填写 projectId。销售阶段使用 lead、contacted、technical_discussion、quotation_sent、negotiation、won、lost 七个受控值。预计金额不是正式报价，没有可靠依据时必须为 null。
